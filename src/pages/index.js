@@ -2,6 +2,7 @@ import React from "react"
 import { Link, graphql } from "gatsby"
 
 import Bio from "../components/bio"
+import Img from 'gatsby-image';
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { rhythm } from "../utils/typography"
@@ -31,13 +32,18 @@ class BlogIndex extends React.Component {
                   </Link>
                 </h3>
                 <small>{node.frontmatter.date}</small>
+                <Link to={node.fields.slug}>
+                <Img sizes={node.frontmatter.featuredImage.childImageSharp.sizes} />
+                </Link>
               </header>
               <section>
+              <Link to={node.fields.slug}>
                 <p
                   dangerouslySetInnerHTML={{
                     __html: node.frontmatter.description || node.excerpt,
                   }}
                 />
+                </Link>
               </section>
             </article>
           )
@@ -67,6 +73,13 @@ export const pageQuery = graphql`
             date(formatString: "MMMM DD, YYYY")
             title
             description
+            featuredImage {
+              childImageSharp {
+                sizes(maxWidth: 570, maxHeight: 400, quality: 100) {
+                  ...GatsbyImageSharpSizes
+                }
+              }
+            }
           }
         }
       }
