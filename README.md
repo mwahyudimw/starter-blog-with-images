@@ -1,1 +1,1 @@
-## Gatbsy starter blog with images and typograpghy changes.
+## Gatbsy starter blog with images and typography changes.
